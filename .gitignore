@@ -2,6 +2,7 @@
 
 .idea
 .idea/newalbert.iml
+.eslintcache
 
 # dependencies
 /node_modules
