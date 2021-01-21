@@ -89,7 +89,7 @@ const Subjects = ({location}) => {
                 console.error(error);
             }
         })();
-    }, []);
+    });
 
 
 

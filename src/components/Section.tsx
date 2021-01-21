@@ -22,7 +22,7 @@ const Section = ({data}) => {
     const sectionCode = data.code;
     const type = data.type;
     const status = data.status;
-    const timing = '';
+    // const timing = '';
     const campus = data.campus;
     const buildingName = data.location;
     const units = data.maxUnits.toString();

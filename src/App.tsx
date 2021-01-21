@@ -1,9 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import HeaderBar from "./components/AppBar";
-import Course from './components/Course';
-import data from './components/sampledata.json';
 import  Schools from './components/Schools';
 import Subjects from "./components/Subjects";
 import Courses from "./components/Courses";

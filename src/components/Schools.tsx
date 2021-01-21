@@ -13,7 +13,7 @@ const SchoolComponentList =({Boolean: loading, Array: data})=>{
     for (let i = 0;i < data.length; i ++){
         const code = Object.keys(data[i])[0];
         const school = data[i][code];
-        if (code == 'NT') {
+        if (code === 'NT') {
             let link=`/subject?schoolCode=${code}&schoolName=${school}`;
             elements.push(
                 <div style={schoolStyle}><button className='btn default'>
@@ -22,7 +22,7 @@ const SchoolComponentList =({Boolean: loading, Array: data})=>{
                     </a>
                 </button></div>
             );
-        } else if (code == 'ND'){
+        } else if (code === 'ND'){
             elements.push();
         } else {
             let link=`/subject?schoolCode=${code}&schoolName=${school}`;

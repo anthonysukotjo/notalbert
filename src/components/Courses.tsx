@@ -61,9 +61,7 @@ const Courses = ({year,term,location}) => {
             }
 
         })();
-    },[]);
-
-    let elements : JSX.Element[] = [];
+    });
 
     return(
         <div className='col'>
