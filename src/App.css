@@ -5,8 +5,21 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
 
+/* On mouse-over */
+.btn:hover {background: #eee;}
 
+.pageBody{
+  padding:30px;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

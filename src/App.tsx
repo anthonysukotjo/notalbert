@@ -4,14 +4,17 @@ import './App.css';
 import HeaderBar from "./components/AppBar";
 import Course from './components/Course';
 import data from './components/sampledata.json';
-import  Home from './pages/Home';
+import  Schools from './components/Schools';
 
 function App() {
   return (
+
     <div className="App">
-      <HeaderBar/>
-      <Home/>
-        <Course data = {data}/>
+        <HeaderBar/>
+        <div className='pageBody'>
+            <Schools/>
+            <Course data = {data}/>
+        </div>
 
     </div>
   );

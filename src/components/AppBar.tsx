@@ -3,7 +3,7 @@ import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 const style = {
-    marginBottom: '20px',
+
     height: '65px',
     backgroundColor: "#54008c",
 }
@@ -15,7 +15,7 @@ const HeaderBar = () => {
             <Navbar collapseOnSelect expand="lg"  variant='dark'  sticky="top"  >
                 <Nav className="mr-auto">
                     <a className="navbar-brand" href="#">
-                        <h2 className='font-weight-bolder'>(New) Albert</h2>
+                        <h2 className='font-weight-bolder'>(not) Albert</h2>
                     </a>
                 </Nav>
             </Navbar>
