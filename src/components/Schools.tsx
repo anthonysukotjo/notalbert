@@ -1,5 +1,4 @@
 import React,{useEffect,useState} from "react";
-import Section from "./Section";
 
 const schoolStyle = {
     // marginTop: '30px',
@@ -15,18 +14,24 @@ const SchoolComponentList =({Boolean: loading, Array: data})=>{
         const code = Object.keys(data[i])[0];
         const school = data[i][code];
         if (code == 'NT') {
+            let link=`/subject?schoolCode=${code}&schoolName=${school}`;
             elements.push(
-                <div style={schoolStyle}>
-                    <h4> <strong> {code} </strong> Non-Credit Tisch School of the Arts</h4>
-                </div>
+                <div style={schoolStyle}><button className='btn default'>
+                    <a href = {link}>
+                        <h4> <strong> {code} </strong> Non-Credit Tisch School of the Arts</h4>
+                    </a>
+                </button></div>
             );
         } else if (code == 'ND'){
             elements.push();
         } else {
+            let link=`/subject?schoolCode=${code}&schoolName=${school}`;
             elements.push(
                 <div style={schoolStyle}>
                     <button className='btn default'>
-                    <h4 > <strong> {code} </strong> {school}</h4>
+                        <a href={link}>
+                            <h4 > <strong> {code} </strong> {school}</h4>
+                        </a>
                 </button>
                 </div>
             );
@@ -49,9 +54,9 @@ const Schools = () => {
     const [schoolList, setSchoolList] = useState({
         loading: true,
         data: {
-            undergraduateCoursesList:  [{},{}],
-            graduateCoursesList:  [{},{}],
-            otherCoursesList: [{},{}]
+            undergraduateSchoolList:  [{},{}],
+            graduateSchoolList:  [{},{}],
+            otherSchoolList: [{},{}]
         }
 
     });
@@ -67,31 +72,30 @@ const Schools = () => {
                 }
                 const data = await response.json();
                 console.log(data);
-                const undergraduateCourses: Object[]= [];
-                const graduateCourses : Object[]=  [];
-                const otherCourses : Object[]=  [];
+                const undergraduateSchools: Object[]= [];
+                const graduateSchools : Object[]=  [];
+                const otherSchools : Object[]=  [];
 
 
                 for (const key in data){
                     let school = {};
                     school[key] =data[key].name;
                     if (key.startsWith('U') ) {
-                        undergraduateCourses.push(school) ;
+                        undergraduateSchools.push(school) ;
                     } else if (key.startsWith('G') ) {
-                        graduateCourses.push(school) ;
+                        graduateSchools.push(school) ;
                     } else  {
-                        otherCourses.push(school) ;
+                        otherSchools.push(school) ;
                     }
                 }
-                console.log("undegrad courses");
-                console.log(undergraduateCourses);
+
 
                 setSchoolList(() => ({
                     loading: false,
                     data: {
-                        undergraduateCoursesList:  undergraduateCourses,
-                        graduateCoursesList:  graduateCourses,
-                        otherCoursesList: otherCourses
+                        undergraduateSchoolList:  undergraduateSchools,
+                        graduateSchoolList:  graduateSchools,
+                        otherSchoolList: otherSchools
                     }
                 }));
             } catch (error) {
@@ -105,19 +109,18 @@ const Schools = () => {
 
     return(
         <div className='col'>
-            <h2 className='font-weight-bolder'>Schools</h2>
             <div className='row'>
 
                 <div className='col'>
                     <h4 className='font-weight-bolder'> Undergraduate</h4>
                     <div className=' text-left'>
-                        <SchoolComponentList Boolean={schoolList.loading} Array={schoolList.data.undergraduateCoursesList}/>
-                        <SchoolComponentList Boolean={schoolList.loading} Array={schoolList.data.otherCoursesList}/></div>
+                        <SchoolComponentList Boolean={schoolList.loading} Array={schoolList.data.undergraduateSchoolList}/>
+                        <SchoolComponentList Boolean={schoolList.loading} Array={schoolList.data.otherSchoolList}/></div>
                 </div>
                 <div className='col'>
                     <h4 className='font-weight-bolder'> Graduate</h4>
                     <div className=' text-left'>
-                        <SchoolComponentList Boolean={schoolList.loading} Array={schoolList.data.graduateCoursesList}/>
+                        <SchoolComponentList Boolean={schoolList.loading} Array={schoolList.data.graduateSchoolList}/>
                     </div>
                 </div>
 

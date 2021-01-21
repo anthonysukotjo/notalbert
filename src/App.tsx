@@ -5,15 +5,35 @@ import HeaderBar from "./components/AppBar";
 import Course from './components/Course';
 import data from './components/sampledata.json';
 import  Schools from './components/Schools';
+import Subjects from "./components/Subjects";
+import Courses from "./components/Courses";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
-  return (
 
+    console.log()
+  return (
     <div className="App">
         <HeaderBar/>
         <div className='pageBody'>
-            <Schools/>
-            <Course data = {data}/>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/">
+                        <Redirect to="/home" />
+                    </Route>
+                    <Route path='/home' component = {Schools}/>
+                    <Route path='/subject'
+                           render={(props) =>(
+                               <Subjects {...props}/>
+                           )}
+                    />
+                    <Route path='/course'
+                           render={(props) =>(
+                               <Courses {...props}  term={'sp'} year={'2021'}/>
+                           )}
+                    />
+                </Switch>
+            </BrowserRouter>
         </div>
 
     </div>

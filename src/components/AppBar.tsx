@@ -14,7 +14,7 @@ const HeaderBar = () => {
         <div style={style} >
             <Navbar collapseOnSelect expand="lg"  variant='dark'  sticky="top"  >
                 <Nav className="mr-auto">
-                    <a className="navbar-brand" href="#">
+                    <a className="navbar-brand" href="/home">
                         <h2 className='font-weight-bolder'>(not) Albert</h2>
                     </a>
                 </Nav>
