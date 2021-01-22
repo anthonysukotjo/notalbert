@@ -80,9 +80,7 @@ const Subjects = ({location}) => {
                 }
 
 
-                let halfIndex = Math.ceil(fullList.length / 2);
-                // const firstHalf = fullList.slice(0,halfIndex);
-                // const secondHalf = fullList.slice(halfIndex, fullList.length);
+
 
                 setSubjectList(() => ({
                     loading: false,
