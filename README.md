@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# (Not) Albert
+
+Course catalog front end for data retrieved from Albert Liu's Schedge API. Made using React.
+
+https://notalbert.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
