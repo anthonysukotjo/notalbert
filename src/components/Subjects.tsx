@@ -66,6 +66,8 @@ const Subjects = ({location}) => {
                 const data = await response.json();
                 console.log(data);
                 const fullList: Object[] = [];
+                const firstHalf: Object[] = [];
+                const secondHalf: Object[] = [];
 
                 for (const key in data[schoolCode]){
                     let subject = {};
@@ -73,10 +75,14 @@ const Subjects = ({location}) => {
                     fullList.push(subject);
                 }
                 fullList.sort((a, b) => Object.keys(a)[0] >  Object.keys(b)[0] ? 1 : -1 );
+                for (let i = 0; i < fullList.length ; i ++) {
+                    i % 2 === 0 ? firstHalf.push(fullList[i]) : secondHalf.push(fullList[i]) ;
+                }
+
 
                 let halfIndex = Math.ceil(fullList.length / 2);
-                const firstHalf = fullList.slice(0,halfIndex);
-                const secondHalf = fullList.slice(halfIndex, fullList.length);
+                // const firstHalf = fullList.slice(0,halfIndex);
+                // const secondHalf = fullList.slice(halfIndex, fullList.length);
 
                 setSubjectList(() => ({
                     loading: false,
