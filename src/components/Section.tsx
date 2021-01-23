@@ -35,15 +35,37 @@ const Section = ({data}) => {
         const instructorNames = data.instructors[j].split(' ');
         const result = rmpData.find(o => (o.firstName.includes(instructorNames[0]) || instructorNames[0].includes(o.firstName)) && o.lastName.includes(instructorNames[instructorNames.length-1]));
 
-        const resultRating = result?.currentRating ?? 'NA';
-        console.log(resultRating);
-        const rmpLink = resultRating !== 'NA' ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`: '/';
+        const resultRating = result?.currentRating ?? 'Not Found';
+        // console.log(resultRating);
+        const ratingColor = (rating) => {
+
+            const ratingFloat =parseFloat(rating);
+
+            if (ratingFloat >= 4) {
+                return '#90ee90';
+                // light green
+            } else if (ratingFloat >= 3 ) {
+                return 'yellow';
+            } else if (ratingFloat <3) {
+                return '#ffcccb';
+                // light red
+            } else if (rating === 'No Rating'){
+                return 'grey';
+            }else {
+                return '#F5F5F5';
+            }
+
+
+
+        }
+        const rmpLink = resultRating !== 'Not Found' ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`: '/';
 
 
         const buttonStyle : CSSProperties = {
-            pointerEvents:  resultRating !== 'NA' ? 'auto': 'none',
+            pointerEvents:  resultRating !== 'Not Found' ? 'auto': 'none',
+            backgroundColor: ratingColor(resultRating),
         }
-        instructorElements.push(<div className='btn btn-info' style = {buttonStyle}>
+        instructorElements.push(<div className='btn' style = {buttonStyle}>
             <a  href={rmpLink} >
                 RMP: {resultRating}
             </a>

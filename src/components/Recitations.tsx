@@ -21,11 +21,11 @@ const Recitations = ({data}) => {
 
         const result = rmpData.find(o => (o.firstName.includes(instructorNames[0]) || instructorNames[0].includes(o.firstName)) && o.lastName.includes(instructorNames[instructorNames.length-1]));
 
-        const resultRating = result?.currentRating ?? 'NA';
+        const resultRating = result?.currentRating ?? 'Not Found';
         // console.log(resultRating);
-        const rmpLink = resultRating !== 'NA' ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`: '/';
+        const rmpLink = resultRating !== 'Not Found' ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`: '/';
         const buttonStyle : CSSProperties = {
-            pointerEvents:  resultRating !== 'NA' ? 'auto': 'none',
+            pointerEvents:  resultRating !== 'Not Found' ? 'auto': 'none',
         }
         instructorElements.push(<div className='btn btn-info' style = {buttonStyle}>
             <a  href={rmpLink} >
