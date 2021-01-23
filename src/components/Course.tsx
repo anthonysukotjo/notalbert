@@ -3,7 +3,6 @@ import Section from "./Section";
 
 const style = {
     margin: '20px',
-    backgroundColor: "yellow",
     borderStyle: "solid",
     padding: '15px',
     display: 'inline-block',

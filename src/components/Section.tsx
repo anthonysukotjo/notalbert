@@ -1,21 +1,55 @@
-import React from "react";
+import React , { CSSProperties }from "react";
+import rmpData from './newrmpdata.json';
+import Recitations from "./Recitations";
 
 const style = {
     margin: '20px',
-    backgroundColor: "#FFFF66",
+    backgroundColor: "#BEBEBE",
     padding: '15px',
     width: '100%',
     display: 'block',
 
-
 }
+
+
 
 const Section = ({data}) => {
 
-    let instructors =  "";
-    for (let j = 0; j <data.instructors.length ; j ++ ){
-        instructors = instructors + data.instructors[j] + " ";
+    let instructorElements : JSX.Element[] = [];
+    let recitations : JSX.Element[] = [];
+
+    if (data.hasOwnProperty('recitations')) {
+        console.log('has recitation');
+        for(let i = 0 ; i < data.recitations.length ; i ++ ){
+            // console.log(data.recitations[i]);
+            recitations.push(<Recitations data={data.recitations[i]}/>)
+        }
+    } else {
+        recitations.push(<div></div>);
     }
+
+
+
+    for (let j = 0; j <data.instructors.length; j ++ ){
+        instructorElements.push(<h4>{data.instructors[j]}</h4>);
+        const instructorNames = data.instructors[j].split(' ');
+        const result = rmpData.find(o => (o.firstName.includes(instructorNames[0]) || instructorNames[0].includes(o.firstName)) && o.lastName.includes(instructorNames[instructorNames.length-1]));
+
+        const resultRating = result?.currentRating ?? 'NA';
+        console.log(resultRating);
+        const rmpLink = resultRating !== 'NA' ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`: '/';
+
+
+        const buttonStyle : CSSProperties = {
+            pointerEvents:  resultRating !== 'NA' ? 'auto': 'none',
+        }
+        instructorElements.push(<div className='btn btn-info' style = {buttonStyle}>
+            <a  href={rmpLink} >
+                RMP: {resultRating}
+            </a>
+        </div>);
+    }
+
 
 
     const registrationNumber = data.registrationNumber;
@@ -31,13 +65,14 @@ const Section = ({data}) => {
 
 
 
+
     return(
       <div className='col' style={style}>
           <h4>Section: {sectionCode}</h4>
           <div className='row'>
               <div className = 'col'>
                   <h6>Instructor</h6>
-                  <h4>{instructors}</h4>
+                  {instructorElements}
               </div>
               <div className = 'col'>
                   <h6>Status</h6>
@@ -67,6 +102,9 @@ const Section = ({data}) => {
           </div>
           <h4>Timing</h4>
           <h5>{notes}</h5>
+          <div>
+              {recitations}
+          </div>
 
       </div>
 
