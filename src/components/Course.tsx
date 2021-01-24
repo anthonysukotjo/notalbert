@@ -2,15 +2,22 @@ import React from 'react';
 import Section from "./Section";
 
 const style = {
-    margin: '20px',
-    borderStyle: "solid",
-    padding: '15px',
+    marginTop: '30px',
+    paddingBottom:'30px',
+    borderBottom:'dotted 4px grey',
     display: 'inline-block',
+}
+
+const  sectionCounterstyle = {
+    color: 'grey'
+
 }
 
 
 
 const course = ({data}) => {
+
+
 
 
     const courseName = data.name;
@@ -27,15 +34,36 @@ const course = ({data}) => {
     );
     }
 
+    const sectionText = noOfSections === 1 ? ' Section' : " Sections";
+
     return(
-        <div style = {style} >
-            <h3> {courseName}</h3>
-            <h3> {courseCode}</h3>
-            <h5>{description}</h5>
-            <h4> this class has {noOfSections} sections</h4>
-            <div className='container col'>
+        <div className={'col flex-column'} style = {style} >
+
+            <div className={'row justify-content-between'}>
+                <div >
+                    <text
+                        style={{
+                            fontSize: '20px',
+                        }}>
+                        <strong>{courseCode + ' '}</strong>{courseName}</text>
+                </div>
+                <div style ={sectionCounterstyle}>
+                    {noOfSections} {sectionText}
+                </div>
+            </div>
+
+            <div className={'justify-content-between row'}  style={{
+                fontSize: '15px',
+                textAlign:'justify',
+                marginTop: '10px',
+                marginBottom:'20px'
+            }}>
+            {description} </div>
+
+            <div className=' align-items-start'>
                 {elements}
             </div>
+
 
         </div>
 
