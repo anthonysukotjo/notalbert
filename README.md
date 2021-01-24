@@ -1,4 +1,4 @@
-# (Not) Albert
+# A1b3rt
 
 Course catalog front end for data retrieved from Albert Liu's Schedge API. Made using React.
 
