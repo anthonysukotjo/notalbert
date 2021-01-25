@@ -4,26 +4,21 @@ import Schools from "./Schools";
 // import FilterBox from "./FilterBox";
 // import EmptySearchText from "./EmptySearchText";
 
-const Home = ()=>{
+const Home = () => {
+  return (
+    <Schools />
 
-    return(
-
-        <Schools/>
-
-        // <div className={ 'col'}>
-        //     <div className={'row'}>
-        //         <div className={'col'}>
-        //             <SearchBar/>
-        //             <EmptySearchText/>
-        //             <Schools/>
-        //         </div>
-        //         <FilterBox/>
-        //     </div>
-        // </div>
-
-
-    );
-
-}
+    // <div className={ 'col'}>
+    //     <div className={'row'}>
+    //         <div className={'col'}>
+    //             <SearchBar/>
+    //             <EmptySearchText/>
+    //             <Schools/>
+    //         </div>
+    //         <FilterBox/>
+    //     </div>
+    // </div>
+  );
+};
 
 export default Home;

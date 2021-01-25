@@ -42,7 +42,7 @@ const HeaderBar = () => {
                             </Link>
                     <Link to='/aboutus'  className="nav-link">
                         <text style={iconStyle}>
-                            ✨ About Us
+                            ✨ About
                         </text>
                     </Link>
                 </Nav>
