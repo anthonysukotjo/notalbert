@@ -209,13 +209,13 @@ const FilterBox = () => {
         </div>
       </div>
 
-      <div style={{ marginBottom: "5px" }}></div>
+      <div style={{ marginBottom: "5px" }} />
 
       <div style={{ textAlign: "left" }}>
         <text className="font-weight-bolder">Semester</text>
       </div>
 
-      <div style={{ marginBottom: "3px" }}></div>
+      <div style={{ marginBottom: "3px" }} />
 
       <div>
         <select
@@ -233,13 +233,13 @@ const FilterBox = () => {
         </select>
       </div>
 
-      <div style={{ marginBottom: "15px" }}></div>
+      <div style={{ marginBottom: "15px" }} />
 
       <div style={{ textAlign: "left" }}>
         <text className="font-weight-bolder">School</text>
       </div>
 
-      <div style={{ marginBottom: "3px" }}></div>
+      <div style={{ marginBottom: "3px" }} />
 
       <div>
         <select
@@ -264,7 +264,7 @@ const FilterBox = () => {
             });
           }}
         >
-          {schoolList.data.map((o, index) => (
+          {schoolList.data.map((o) => (
             <option
               key={Object.keys(o)[0]}
               value={Object.keys(o)[0]}
@@ -276,13 +276,13 @@ const FilterBox = () => {
         </select>
       </div>
 
-      <div style={{ marginBottom: "15px" }}></div>
+      <div style={{ marginBottom: "15px" }} />
 
       <div style={{ textAlign: "left" }}>
         <text className="font-weight-bolder">Subject</text>
       </div>
 
-      <div style={{ marginBottom: "3px" }}></div>
+      <div style={{ marginBottom: "3px" }} />
 
       <div>
         <select
@@ -338,7 +338,7 @@ const FilterBox = () => {
             value="inPerson"
             style={{ marginTop: "4px", marginRight: "7px" }}
             checked={instructionMode.inPerson}
-            onChange={(e) => {
+            onChange={() => {
               setInstructionMode({
                 online: instructionMode.online,
                 blended: instructionMode.blended,
@@ -354,7 +354,7 @@ const FilterBox = () => {
             value="blended"
             style={{ marginTop: "4px", marginRight: "7px" }}
             checked={instructionMode.blended}
-            onChange={(e) => {
+            onChange={() => {
               setInstructionMode({
                 online: instructionMode.online,
                 blended: !instructionMode.blended,
@@ -378,12 +378,10 @@ const FilterBox = () => {
             <div>
               <input
                 type="checkbox"
-                id="vehicle1"
-                name="vehicle1"
-                value="Bike"
+                value="one"
                 style={{ marginRight: "7px" }}
                 checked={classUnits.one}
-                onChange={(e) => {
+                onChange={() => {
                   setClassUnits({
                     one: !classUnits.one,
                     two: classUnits.two,
@@ -400,12 +398,10 @@ const FilterBox = () => {
             <div>
               <input
                 type="checkbox"
-                id="vehicle1"
-                name="vehicle1"
-                value="Bike"
+                value="two"
                 style={{ marginRight: "7px" }}
                 checked={classUnits.two}
-                onChange={(e) => {
+                onChange={() => {
                   setClassUnits({
                     one: classUnits.one,
                     two: !classUnits.two,
@@ -421,12 +417,10 @@ const FilterBox = () => {
             <div>
               <input
                 type="checkbox"
-                id="vehicle1"
-                name="vehicle1"
-                value="Bike"
+                value="three"
                 style={{ marginRight: "7px" }}
                 checked={classUnits.three}
-                onChange={(e) => {
+                onChange={() => {
                   setClassUnits({
                     one: classUnits.one,
                     two: classUnits.two,
@@ -444,12 +438,10 @@ const FilterBox = () => {
             <div>
               <input
                 type="checkbox"
-                id="vehicle2"
-                name="vehicle2"
-                value="Car"
+                value="four"
                 style={{ marginRight: "7px" }}
                 checked={classUnits.four}
-                onChange={(e) => {
+                onChange={() => {
                   setClassUnits({
                     one: classUnits.one,
                     two: classUnits.two,
@@ -465,12 +457,10 @@ const FilterBox = () => {
             <div>
               <input
                 type="checkbox"
-                id="vehicle3"
-                name="vehicle3"
-                value="Boat"
+                value="five"
                 style={{ marginRight: "7px" }}
                 checked={classUnits.five}
-                onChange={(e) => {
+                onChange={() => {
                   setClassUnits({
                     one: classUnits.one,
                     two: classUnits.two,
@@ -486,12 +476,10 @@ const FilterBox = () => {
             <div>
               <input
                 type="checkbox"
-                id="vehicle3"
-                name="vehicle3"
-                value="Boat"
+                value="more"
                 style={{ marginRight: "7px" }}
                 checked={classUnits.more}
-                onChange={(e) => {
+                onChange={() => {
                   setClassUnits({
                     one: classUnits.one,
                     two: classUnits.two,

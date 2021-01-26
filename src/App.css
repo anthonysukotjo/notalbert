@@ -11,6 +11,29 @@ a:visited {color:#000;}  /* visited link    */
 a:hover   {color:#000;}  /* mouse over link */
 a:active  {color:#000;}  /* selected link   */
 
+.searchBar:focus {
+  outline: none;
+  /*border-bottom:2px solid #54008c !important;*/
+  /*border-bottom-width: 900px !important;*/
+}
+
+.boxBorderStyle :hover {
+  outline: none;
+  border-bottom:2px solid #54008c !important;
+  /*border-bottom-width: 900px !important;*/
+}
+
+.btnX{
+  margin-top: 35px;
+  padding: 0px;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+}
+.btnX:hover {
+  color: #54008c !important;
+}
+
 .btn {
   border: none;
   background-color: inherit;
