@@ -7,19 +7,26 @@ const boxStyle = {
   borderRadius: "20px",
   padding: "20px",
   display: "inline-block",
-  maxWidth: "320px",
-  minWidth: "320px",
-  height: "590px",
+  maxWidth: "300px",
+  minWidth: "300px",
+  // height: "590px",
+  height: "320px",
   marginLeft: "30px",
   marginRight: "30px",
 };
 
-const FilterBox = () => {
+const FilterBox = ({
+  retrieveSem,
+  retrieveInstructionMode,
+  retrieveClassUnits,
+  retrieveSelectedSchool,
+  retrieveSelectedSubjects,
+}) => {
   const semOptions = [
     { semCode: "2021:sp", label: "Spring 2021" },
     { semCode: "2020:fa", label: "Fall 2020" },
   ];
-  const [sem, setSem] = useState(semOptions[0].semCode);
+  const [sem, setSem] = useState("2021:sp");
 
   const [instructionMode, setInstructionMode] = useState({
     online: false,
@@ -34,6 +41,7 @@ const FilterBox = () => {
     five: false,
     more: false,
   });
+  console.log(classUnits);
 
   const [schoolList, setSchoolList] = useState({
     schoolLoading: true,
@@ -181,27 +189,38 @@ const FilterBox = () => {
             }}
             onClick={() => {
               console.log("clear filter clicked");
-              setSelectedSchool({
+
+              const noSelectedSchool = {
                 schoolCode: "noCode",
                 name: "Select School",
-              });
-              setSelectedSubjects({
+              };
+              const noSelectedSubjects = {
                 subjectCode: "noCode",
                 name: "Select School",
-              });
-              setClassUnits({
+              };
+              const noClassUnits = {
                 one: false,
                 two: false,
                 three: false,
                 four: false,
                 five: false,
                 more: false,
-              });
-              setInstructionMode({
+              };
+              const noInstructionMode = {
                 online: false,
                 inPerson: false,
                 blended: false,
-              });
+              };
+
+              setSelectedSchool(noSelectedSchool);
+              setSelectedSubjects(noSelectedSubjects);
+              setClassUnits(noClassUnits);
+              setInstructionMode(noInstructionMode);
+
+              retrieveSelectedSchool(noSelectedSchool);
+              retrieveSelectedSubjects(noSelectedSubjects);
+              retrieveClassUnits(noClassUnits);
+              retrieveInstructionMode(noInstructionMode);
             }}
           >
             Clear Filters
@@ -223,6 +242,9 @@ const FilterBox = () => {
           // value={sem}
           onChange={(e) => {
             setSem(e.target.value);
+            const year = e.target.value.split(":")[0];
+            const term = e.target.value.split(":")[1];
+            retrieveSem(year, term);
           }}
         >
           {semOptions.map((o) => (
@@ -249,7 +271,7 @@ const FilterBox = () => {
             const index = schoolList.data.findIndex(
               (obj) => Object.keys(obj)[0] === e.target.value
             );
-            setSelectedSchool({
+            const school = {
               schoolCode: e.target.value,
               name: schoolList.data[index][e.target.value],
               // schoolCode: Object.keys(schoolList.data[e.target.value])[0],
@@ -257,7 +279,9 @@ const FilterBox = () => {
               //   schoolList.data[e.target.value][
               //     Object.keys(schoolList.data[e.target.value])[0]
               //   ],
-            });
+            };
+            setSelectedSchool(school);
+            retrieveSelectedSchool(school);
             setSelectedSubjects({
               subjectCode: "noCode",
               name: "Select Subject",
@@ -292,10 +316,12 @@ const FilterBox = () => {
               subjectList.data[selectedSchool.schoolCode]
             )[e.target.value];
             const code = Object.keys(subjectArray)[0];
-            setSelectedSubjects({
+            const subject = {
               subjectCode: code,
               name: subjectArray[code],
-            });
+            };
+            setSelectedSubjects(subject);
+            retrieveSelectedSubjects(subject);
           }}
         >
           {filteredSubjects(subjectList.data[selectedSchool.schoolCode]).map(
@@ -307,194 +333,217 @@ const FilterBox = () => {
           )}
         </select>
       </div>
-      <div style={{ textAlign: "left" }}>
-        <div style={{ marginBottom: "15px" }} />
 
-        <text className="font-weight-bolder">Instruction Mode</text>
-      </div>
+      {/*<div style={{ textAlign: "left" }}>*/}
+      {/*  <div style={{ marginBottom: "15px" }} />*/}
 
-      <div style={{ marginBottom: "5px" }} />
+      {/*  <text className="font-weight-bolder">Instruction Mode</text>*/}
+      {/*</div>*/}
 
-      <div className="col flex-column align-items-start">
-        <div className="row">
-          <input
-            type="checkbox"
-            value="online"
-            checked={instructionMode.online}
-            style={{ marginTop: "4px", marginRight: "7px" }}
-            onChange={() => {
-              setInstructionMode({
-                online: !instructionMode.online,
-                blended: instructionMode.blended,
-                inPerson: instructionMode.inPerson,
-              });
-            }}
-          />
-          <label> Online</label>
-        </div>
-        <div className="row">
-          <input
-            type="checkbox"
-            value="inPerson"
-            style={{ marginTop: "4px", marginRight: "7px" }}
-            checked={instructionMode.inPerson}
-            onChange={() => {
-              setInstructionMode({
-                online: instructionMode.online,
-                blended: instructionMode.blended,
-                inPerson: !instructionMode.inPerson,
-              });
-            }}
-          />
-          <label> In person</label>
-        </div>
-        <div className="row">
-          <input
-            type="checkbox"
-            value="blended"
-            style={{ marginTop: "4px", marginRight: "7px" }}
-            checked={instructionMode.blended}
-            onChange={() => {
-              setInstructionMode({
-                online: instructionMode.online,
-                blended: !instructionMode.blended,
-                inPerson: instructionMode.inPerson,
-              });
-            }}
-          />
-          <label> Blended</label>
-        </div>
-      </div>
+      {/*<div style={{ marginBottom: "5px" }} />*/}
+
+      {/*<div className="col flex-column align-items-start">*/}
+      {/*  <div className="row">*/}
+      {/*    <input*/}
+      {/*      type="checkbox"*/}
+      {/*      value="online"*/}
+      {/*      checked={instructionMode.online}*/}
+      {/*      style={{ marginTop: "4px", marginRight: "7px" }}*/}
+      {/*      onChange={() => {*/}
+      {/*        const newInstructionMode = {*/}
+      {/*          online: !instructionMode.online,*/}
+      {/*          blended: instructionMode.blended,*/}
+      {/*          inPerson: instructionMode.inPerson,*/}
+      {/*        };*/}
+      {/*        setInstructionMode(newInstructionMode);*/}
+      {/*        retrieveInstructionMode(newInstructionMode);*/}
+      {/*      }}*/}
+      {/*    />*/}
+      {/*    <label> Online</label>*/}
+      {/*  </div>*/}
+      {/*  <div className="row">*/}
+      {/*    <input*/}
+      {/*      type="checkbox"*/}
+      {/*      value="inPerson"*/}
+      {/*      style={{ marginTop: "4px", marginRight: "7px" }}*/}
+      {/*      checked={instructionMode.inPerson}*/}
+      {/*      onChange={() => {*/}
+      {/*        const newInstructionMode = {*/}
+      {/*          online: instructionMode.online,*/}
+      {/*          blended: instructionMode.blended,*/}
+      {/*          inPerson: !instructionMode.inPerson,*/}
+      {/*        };*/}
+
+      {/*        setInstructionMode(newInstructionMode);*/}
+      {/*        retrieveInstructionMode(newInstructionMode);*/}
+      {/*      }}*/}
+      {/*    />*/}
+      {/*    <label> In person</label>*/}
+      {/*  </div>*/}
+      {/*  <div className="row">*/}
+      {/*    <input*/}
+      {/*      type="checkbox"*/}
+      {/*      value="blended"*/}
+      {/*      style={{ marginTop: "4px", marginRight: "7px" }}*/}
+      {/*      checked={instructionMode.blended}*/}
+      {/*      onChange={() => {*/}
+      {/*        const newInstructionMode = {*/}
+      {/*          online: instructionMode.online,*/}
+      {/*          blended: !instructionMode.blended,*/}
+      {/*          inPerson: instructionMode.inPerson,*/}
+      {/*        };*/}
+      {/*        setInstructionMode(newInstructionMode);*/}
+      {/*        retrieveInstructionMode(newInstructionMode);*/}
+      {/*      }}*/}
+      {/*    />*/}
+      {/*    <label> Blended</label>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       <div style={{ marginBottom: "15px" }} />
 
-      <div style={{ textAlign: "left" }}>
-        <text className="font-weight-bolder">Class Units</text>
+      {/*<div style={{ textAlign: "left" }}>*/}
+      {/*  <text className="font-weight-bolder">Class Units</text>*/}
 
-        <div style={{ marginBottom: "5px" }} />
+      {/*  <div style={{ marginBottom: "5px" }} />*/}
 
-        <div className={"row"}>
-          <div className={"col"}>
-            <div>
-              <input
-                type="checkbox"
-                value="one"
-                style={{ marginRight: "7px" }}
-                checked={classUnits.one}
-                onChange={() => {
-                  setClassUnits({
-                    one: !classUnits.one,
-                    two: classUnits.two,
-                    three: classUnits.three,
-                    four: classUnits.four,
-                    five: classUnits.five,
-                    more: classUnits.more,
-                  });
-                }}
-              />
-              <label htmlFor="vehicle1"> 0 to 1 units</label>
-            </div>
+      {/*<div className={"row"}>*/}
+      {/*  <div className={"col"}>*/}
+      {/*    <div>*/}
+      {/*      <input*/}
+      {/*        type="checkbox"*/}
+      {/*        value="one"*/}
+      {/*        style={{ marginRight: "7px" }}*/}
+      {/*        checked={classUnits.one}*/}
+      {/*        onChange={() => {*/}
+      {/*          const newClassUnits = {*/}
+      {/*            one: !classUnits.one,*/}
+      {/*            two: classUnits.two,*/}
+      {/*            three: classUnits.three,*/}
+      {/*            four: classUnits.four,*/}
+      {/*            five: classUnits.five,*/}
+      {/*            more: classUnits.more,*/}
+      {/*          };*/}
+      {/*          setClassUnits(newClassUnits);*/}
+      {/*          retrieveClassUnits(newClassUnits);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="vehicle1"> 0 to 1 units</label>*/}
+      {/*    </div>*/}
 
-            <div>
-              <input
-                type="checkbox"
-                value="two"
-                style={{ marginRight: "7px" }}
-                checked={classUnits.two}
-                onChange={() => {
-                  setClassUnits({
-                    one: classUnits.one,
-                    two: !classUnits.two,
-                    three: classUnits.three,
-                    four: classUnits.four,
-                    five: classUnits.five,
-                    more: classUnits.more,
-                  });
-                }}
-              />
-              <label htmlFor="vehicle1"> 2 units</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                value="three"
-                style={{ marginRight: "7px" }}
-                checked={classUnits.three}
-                onChange={() => {
-                  setClassUnits({
-                    one: classUnits.one,
-                    two: classUnits.two,
-                    three: !classUnits.three,
-                    four: classUnits.four,
-                    five: classUnits.five,
-                    more: classUnits.more,
-                  });
-                }}
-              />
-              <label htmlFor="vehicle1"> 3 units</label>
-            </div>
-          </div>
-          <div className={"col"}>
-            <div>
-              <input
-                type="checkbox"
-                value="four"
-                style={{ marginRight: "7px" }}
-                checked={classUnits.four}
-                onChange={() => {
-                  setClassUnits({
-                    one: classUnits.one,
-                    two: classUnits.two,
-                    three: classUnits.three,
-                    four: !classUnits.four,
-                    five: classUnits.five,
-                    more: classUnits.more,
-                  });
-                }}
-              />
-              <label htmlFor="vehicle2"> 4 units</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                value="five"
-                style={{ marginRight: "7px" }}
-                checked={classUnits.five}
-                onChange={() => {
-                  setClassUnits({
-                    one: classUnits.one,
-                    two: classUnits.two,
-                    three: classUnits.three,
-                    four: classUnits.four,
-                    five: !classUnits.five,
-                    more: classUnits.more,
-                  });
-                }}
-              />
-              <label htmlFor="vehicle3"> 5 units</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                value="more"
-                style={{ marginRight: "7px" }}
-                checked={classUnits.more}
-                onChange={() => {
-                  setClassUnits({
-                    one: classUnits.one,
-                    two: classUnits.two,
-                    three: classUnits.three,
-                    four: classUnits.four,
-                    five: classUnits.five,
-                    more: !classUnits.more,
-                  });
-                }}
-              />
-              <label htmlFor="vehicle3"> {">"}5 units </label>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/*    <div>*/}
+      {/*      <input*/}
+      {/*        type="checkbox"*/}
+      {/*        value="two"*/}
+      {/*        style={{ marginRight: "7px" }}*/}
+      {/*        checked={classUnits.two}*/}
+      {/*        onChange={() => {*/}
+      {/*          const newClassUnits = {*/}
+      {/*            one: classUnits.one,*/}
+      {/*            two: !classUnits.two,*/}
+      {/*            three: classUnits.three,*/}
+      {/*            four: classUnits.four,*/}
+      {/*            five: classUnits.five,*/}
+      {/*            more: classUnits.more,*/}
+      {/*          };*/}
+      {/*          setClassUnits(newClassUnits);*/}
+      {/*          retrieveClassUnits(newClassUnits);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="vehicle1"> 2 units</label>*/}
+      {/*    </div>*/}
+      {/*    <div>*/}
+      {/*      <input*/}
+      {/*        type="checkbox"*/}
+      {/*        value="three"*/}
+      {/*        style={{ marginRight: "7px" }}*/}
+      {/*        checked={classUnits.three}*/}
+      {/*        onChange={() => {*/}
+      {/*          const newClassUnits = {*/}
+      {/*            one: classUnits.one,*/}
+      {/*            two: classUnits.two,*/}
+      {/*            three: !classUnits.three,*/}
+      {/*            four: classUnits.four,*/}
+      {/*            five: classUnits.five,*/}
+      {/*            more: classUnits.more,*/}
+      {/*          };*/}
+      {/*          setClassUnits(newClassUnits);*/}
+      {/*          retrieveClassUnits(newClassUnits);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="vehicle1"> 3 units</label>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*  <div className={"col"}>*/}
+      {/*    <div>*/}
+      {/*      <input*/}
+      {/*        type="checkbox"*/}
+      {/*        value="four"*/}
+      {/*        style={{ marginRight: "7px" }}*/}
+      {/*        checked={classUnits.four}*/}
+      {/*        onChange={() => {*/}
+      {/*          const newClassUnits = {*/}
+      {/*            one: classUnits.one,*/}
+      {/*            two: classUnits.two,*/}
+      {/*            three: classUnits.three,*/}
+      {/*            four: !classUnits.four,*/}
+      {/*            five: classUnits.five,*/}
+      {/*            more: classUnits.more,*/}
+      {/*          };*/}
+
+      {/*          setClassUnits(newClassUnits);*/}
+      {/*          retrieveClassUnits(newClassUnits);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="vehicle2"> 4 units</label>*/}
+      {/*    </div>*/}
+      {/*    <div>*/}
+      {/*      <input*/}
+      {/*        type="checkbox"*/}
+      {/*        value="five"*/}
+      {/*        style={{ marginRight: "7px" }}*/}
+      {/*        checked={classUnits.five}*/}
+      {/*        onChange={() => {*/}
+      {/*          const newClassUnits = {*/}
+      {/*            one: classUnits.one,*/}
+      {/*            two: classUnits.two,*/}
+      {/*            three: classUnits.three,*/}
+      {/*            four: classUnits.four,*/}
+      {/*            five: !classUnits.five,*/}
+      {/*            more: classUnits.more,*/}
+      {/*          };*/}
+
+      {/*          setClassUnits(newClassUnits);*/}
+      {/*          retrieveClassUnits(newClassUnits);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="vehicle3"> 5 units</label>*/}
+      {/*    </div>*/}
+      {/*    <div>*/}
+      {/*      <input*/}
+      {/*        type="checkbox"*/}
+      {/*        value="more"*/}
+      {/*        style={{ marginRight: "7px" }}*/}
+      {/*        checked={classUnits.more}*/}
+      {/*        onChange={() => {*/}
+      {/*          const newClassUnits = {*/}
+      {/*            one: classUnits.one,*/}
+      {/*            two: classUnits.two,*/}
+      {/*            three: classUnits.three,*/}
+      {/*            four: classUnits.four,*/}
+      {/*            five: classUnits.five,*/}
+      {/*            more: !classUnits.more,*/}
+      {/*          };*/}
+
+      {/*          setClassUnits(newClassUnits);*/}
+      {/*          retrieveClassUnits(newClassUnits);*/}
+      {/*        }}*/}
+      {/*      />*/}
+      {/*      <label htmlFor="vehicle3"> {">"}5 units </label>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+      {/*</div>*/}
     </div>
   );
 };

@@ -1,25 +1,61 @@
 import React, { useEffect, useState } from "react";
 import Course from "./Course";
-import qs from "qs";
+// import qs from "qs";
 
-const CourseComponentListBuilder = ({ Boolean: loading, Array: data }) => {
+const CourseComponentListBuilder = ({
+  loading,
+  data,
+  // instructionMode,
+  // classUnits,
+}) => {
   console.log("building...");
   let elements: JSX.Element[] = [];
+
+  // const noClassUnits = {
+  //   one: false,
+  //   two: false,
+  //   three: false,
+  //   four: false,
+  //   five: false,
+  //   more: false,
+  // };
+  // const noInstructionMode = {
+  //   online: false,
+  //   inPerson: false,
+  //   blended: false,
+  // };
+
   for (let i = 0; i < data.length; i++) {
     elements.push(<Course data={data[i]} />);
   }
   if (!loading) {
     return <div>{elements}</div>;
-  } else return <div></div>;
+  } else return <div />;
 };
 
-const Courses = ({ year, term, location }) => {
-  const { school } = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  const { subject } = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
+const style = {
+  marginTop: "30px",
+  // borderBottom: "dotted 4px grey",
+  display: "inline-block",
+};
+
+const Courses = ({
+  year,
+  term,
+  school,
+  subject,
+  query,
+  // instructionMode,
+  // classUnits,
+}) => {
+  console.log("the query is" + query);
+  // add location as props if uncommenting below
+  // const { school } = qs.parse(location.search, {
+  //   ignoreQueryPrefix: true,
+  // });
+  // const { subject } = qs.parse(location.search, {
+  //   ignoreQueryPrefix: true,
+  // });
 
   const [courseList, setCourseList] = useState({
     schoolLoading: true,
@@ -29,8 +65,41 @@ const Courses = ({ year, term, location }) => {
   useEffect(() => {
     (async () => {
       try {
-        const link = `https://schedge.a1liu.com/${year}/${term}/${school}/${subject}?full=true`;
+        const coursesLink = `https://schedge.a1liu.com/${year}/${term}/${school}/${subject}?full=true`;
+        const searchLinkOnly = `https://schedge.a1liu.com/${year}/${term}/search?query=${query.replace(
+          /\\s/g,
+          "+"
+        )}&full=true`;
+        const searchLinkAndSubject = `https://schedge.a1liu.com/${year}/${term}/search?query=${query.replace(
+          /\\s/g,
+          "+"
+        )}&full=true&school=${school}&subject=${subject}`;
+
+        const searchLinkOnlySchool = `https://schedge.a1liu.com/${year}/${term}/search?query=${query.replace(
+          /\\s/g,
+          "+"
+        )}&full=true&school=${school}`;
+
+        let link = "";
+
+        if (query !== "" && subject !== "noCode" && school !== "noCode") {
+          link = searchLinkAndSubject;
+        } else if (
+          query !== "" &&
+          subject === "noCode" &&
+          school === "noCode"
+        ) {
+          link = searchLinkOnly;
+        } else if (subject !== "noCode" && school !== "noCode") {
+          link = coursesLink;
+        } else if (subject === "noCode" && school !== "noCode") {
+          link = searchLinkOnlySchool;
+        }
+
+        console.log("the link is " + link);
+
         const response = await fetch(link);
+
         console.log("fetching...");
         if (!response.ok) {
           // handle invalid search parameters
@@ -46,13 +115,18 @@ const Courses = ({ year, term, location }) => {
         console.error(error);
       }
     })();
-  });
+  }, [school, subject, query, term, year]);
 
   return (
     <div className="col">
+      <div style={style}>
+        <strong>{courseList.data.length} Courses Found</strong>
+      </div>
       <CourseComponentListBuilder
-        Boolean={courseList.schoolLoading}
-        Array={courseList.data}
+        loading={courseList.schoolLoading}
+        data={courseList.data}
+        //   instructionMode={instructionMode}
+        //   classUnits={classUnits}
       />
     </div>
   );

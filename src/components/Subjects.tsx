@@ -95,7 +95,7 @@ const Subjects = ({ location }) => {
         console.error(error);
       }
     })();
-  });
+  }, []);
 
   return (
     <div className="col">

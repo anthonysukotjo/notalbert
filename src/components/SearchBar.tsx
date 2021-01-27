@@ -2,21 +2,21 @@ import React, { useState } from "react";
 
 const searchBarStyle = {
   height: "50px",
-  width: "800px",
+  width: "900px",
   marginTop: "25px",
   padding: "15px",
   border: "hidden",
 };
 
 const boxBorderStyle = {
-  width: "830px",
+  width: "930px",
   borderBottom: "solid 0.5px grey",
 };
 
-const SearchBar = () => {
+const SearchBar = ({ bool, retrieveSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  console.log(searchQuery);
+  // console.log(searchQuery);
   return (
     <div>
       <form>
@@ -26,20 +26,26 @@ const SearchBar = () => {
             style={searchBarStyle}
             value={searchQuery}
             autoComplete="off"
-            placeholder="🔍 Search Code, names and descriptions"
+            placeholder="🔍 Search names and descriptions"
             onChange={(e) => {
+              retrieveSearch(e.target.value);
               setSearchQuery(e.target.value);
             }}
           />
-          <button
-            type="button"
-            className={"btnX"}
-            onClick={() => {
-              setSearchQuery("");
-            }}
-          >
-            <strong style={{ textAlign: "left" }}>✕</strong>
-          </button>
+          {bool ? (
+            <button
+              type="button"
+              className={"btnX"}
+              onClick={() => {
+                retrieveSearch("");
+                setSearchQuery("");
+              }}
+            >
+              <strong style={{ textAlign: "left" }}>✕</strong>
+            </button>
+          ) : (
+            <div />
+          )}
         </div>
       </form>
     </div>
