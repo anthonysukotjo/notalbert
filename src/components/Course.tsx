@@ -64,12 +64,14 @@ const Course = ({ data }) => {
       </div>
       <div className="row justify-content-end">
         <button
-          className={"btn btn-secondary"}
+          className={"btn"}
           onClick={() => {
             setShowSections(!showSections);
           }}
           style={{
             marginBottom: "20px",
+            backgroundColor: "grey",
+            color: "white",
             fontSize: "15px",
           }}
         >

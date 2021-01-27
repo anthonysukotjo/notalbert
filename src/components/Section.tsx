@@ -210,9 +210,11 @@ const Section = ({ data }) => {
         <div className="row justify-content-end">
           {data.hasOwnProperty("recitations") ? (
             <button
-              className={"btn btn-info"}
+              className={"btn"}
               style={{
                 marginRight: "15px",
+                backgroundColor: "purple",
+                color: "white",
                 fontSize: "15px",
                 marginTop: "10px",
                 marginBottom: "25px",
