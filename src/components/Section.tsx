@@ -47,19 +47,19 @@ const Section = ({ data }) => {
       const ratingFloat = parseFloat(rating);
 
       if (ratingFloat >= 4) {
-        return "#003300";
-        // light green
+        return "green";
       } else if (ratingFloat >= 3) {
-        return "#993300";
+        return "#ff8c00";
+        //dark orange
       } else if (ratingFloat < 3) {
-        return "#480000 ";
-        // light red
+        return "red ";
       } else if (rating === "No Rating") {
         return "#585858";
       } else {
         return "#383838";
       }
     };
+
     const rmpLink =
       resultRating !== "Not Found"
         ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`
@@ -117,8 +117,20 @@ const Section = ({ data }) => {
     let time = data.meetings[i].beginDate.split(" ")[1];
     time = time.slice(0, time.length - 3);
     const date = new Date(data.meetings[i].beginDate + " GMT");
+    const totalMinutesDuration = data.meetings[i].minutesDuration;
+    const hours = Math.floor(totalMinutesDuration / 60);
+    const minutes = totalMinutesDuration % 60;
 
-    result = result + week[date.getUTCDay() - 1] + " " + time;
+    result =
+      result +
+      week[date.getUTCDay() - 1] +
+      " " +
+      time +
+      "\n" +
+      hours.toString() +
+      "h" +
+      minutes +
+      "min";
     console.log(result);
     meetingTimings.push(result);
   }
