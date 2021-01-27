@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import HeaderBar from "./components/AppBar";
 // import Subjects from "./components/Subjects";
-import Courses from "./components/Courses";
+// import Courses from "./components/Courses";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 // import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
