@@ -109,30 +109,44 @@ const Section = ({ data }) => {
   const week = ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"];
 
   const meetingTimings: String[] = [];
-  for (let i = 0; i < data.meetings.length; i++) {
-    let result = "";
-    console.log("attempt to parse time");
-    console.log(data.meetings[i]);
-    console.log(data.meetings[i].beginDate);
-    let time = data.meetings[i].beginDate.split(" ")[1];
-    time = time.slice(0, time.length - 3);
-    const date = new Date(data.meetings[i].beginDate + " GMT");
-    const totalMinutesDuration = data.meetings[i].minutesDuration;
-    const hours = Math.floor(totalMinutesDuration / 60);
-    const minutes = totalMinutesDuration % 60;
+  if (Array.isArray(data.meetings)) {
+    for (let i = 0; i < data.meetings.length; i++) {
+      let result = "";
+      console.log("attempt to parse time for section " + data.code);
+      console.log(data.meetings[i]);
+      console.log(data.meetings[i].beginDate);
+      const dateArray = data.meetings[i].beginDate.split(" ")[0].split("-");
+      for (const index in dateArray) {
+        console.log(dateArray[index]);
+      }
+      const dateObject = new Date(
+        parseInt(dateArray[0]),
+        parseInt(dateArray[1]) - 1,
+        parseInt(dateArray[2])
+      );
+      console.log(dateObject);
+      console.log("weekday: " + dateObject.getDay());
 
-    result =
-      result +
-      week[date.getUTCDay() - 1] +
-      " " +
-      time +
-      "\n" +
-      hours.toString() +
-      "h" +
-      minutes +
-      "min";
-    console.log(result);
-    meetingTimings.push(result);
+      let time = data.meetings[i].beginDate.split(" ")[1];
+      time = time.slice(0, time.length - 3);
+
+      const totalMinutesDuration = data.meetings[i].minutesDuration;
+      const hours = Math.floor(totalMinutesDuration / 60);
+      const minutes = totalMinutesDuration % 60;
+
+      result =
+        result +
+        week[dateObject.getUTCDay()] +
+        " " +
+        time +
+        "\n" +
+        hours.toString() +
+        "h" +
+        minutes +
+        "min";
+      console.log(result);
+      meetingTimings.push(result);
+    }
   }
 
   return (

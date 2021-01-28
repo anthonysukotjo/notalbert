@@ -10,7 +10,6 @@ const AboutUs = () => {
       }}
     >
       <h4 style={{ marginBottom: "20px" }}>
-        {" "}
         <strong>How does A1b3rt work?</strong>
       </h4>
       <h6>
@@ -21,7 +20,11 @@ const AboutUs = () => {
         Schedge scrapes data from the real Albert course catalog and uploads it
         to an online database.
       </h6>
-      <h6>The data can then be accessed through the API end-points.</h6>
+      <h6>This data can then be accessed through the API end-points.</h6>
+
+      <h4 style={{ marginBottom: "20px", marginTop: "20px" }}>
+        <strong>Contribute here:</strong>
+      </h4>
 
       <div className={"row"} style={{ marginLeft: "1px", marginTop: "25px" }}>
         <div

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Course from "./Course";
+import Spinner from "react-bootstrap/Spinner";
+
 // import qs from "qs";
 
 const CourseComponentListBuilder = ({
@@ -126,7 +128,11 @@ const Courses = ({
   return (
     <div className="col">
       <div style={style}>
-        <strong>{courseList.data.length} Courses Found</strong>
+        {courseList.schoolLoading ? (
+          <Spinner animation="border" />
+        ) : (
+          <strong>{courseList.data.length} Courses Found</strong>
+        )}
       </div>
       <CourseComponentListBuilder
         loading={courseList.schoolLoading}

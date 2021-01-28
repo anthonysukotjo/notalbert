@@ -88,7 +88,10 @@ const SearchPage = () => {
   console.log(instructionMode);
   return (
     <div>
-      <div className={"col"}>
+      <div
+        className={"col "}
+        style={{ width: "auto", display: "inline-block" }}
+      >
         <div className={"row "}>
           <div className={"col "}>
             <SearchBar

@@ -290,15 +290,19 @@ const FilterBox = ({
             });
           }}
         >
-          {schoolList.data.map((o) => (
-            <option
-              key={Object.keys(o)[0]}
-              value={Object.keys(o)[0]}
-              selected={Object.keys(o)[0] === selectedSchool.schoolCode}
-            >
-              {o[Object.keys(o)[0]]}
-            </option>
-          ))}
+          {schoolList.schoolLoading ? (
+            <option>Loading...</option>
+          ) : (
+            schoolList.data.map((o) => (
+              <option
+                key={Object.keys(o)[0]}
+                value={Object.keys(o)[0]}
+                selected={Object.keys(o)[0] === selectedSchool.schoolCode}
+              >
+                {o[Object.keys(o)[0]]}
+              </option>
+            ))
+          )}
         </select>
       </div>
 

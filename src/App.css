@@ -17,6 +17,13 @@ a:active  {color:#000;}  /* selected link   */
   /*border-bottom-width: 900px !important;*/
 }
 
+.searchBarDiv{
+
+  width: min(900px,87vw)
+  /*maxWidth: "900px",*/
+  /*width: "800px",*/
+  /*minWidth: "10vmin",*/
+}
 .boxBorderStyle :hover {
   outline: none;
   border-bottom:2px solid #54008c !important;
