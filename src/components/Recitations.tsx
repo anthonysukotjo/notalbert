@@ -58,8 +58,8 @@ const Recitations = ({ data }) => {
       fontSize: "15px",
     };
     instructorElements.push(
-      <a href={rmpLink}>
-        <text style={linkStyle}> RMP: {resultRating} </text>
+      <a href={rmpLink} style={linkStyle}>
+        <text> RMP: {resultRating} </text>
       </a>
     );
   }
@@ -169,7 +169,7 @@ const Recitations = ({ data }) => {
           <div style={{ fontWeight: "bold" }}>{type}</div>
         </div>
         <div className="col">
-          <div>Registration #</div>
+          <div>Reg #</div>
           <div style={{ fontWeight: "bold" }}>{registrationNumber}</div>
         </div>
 

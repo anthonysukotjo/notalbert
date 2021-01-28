@@ -65,18 +65,18 @@ const Section = ({ data }) => {
         ? `https://www.ratemyprofessors.com/ShowRatings.jsp?tid=${result?.rmpid}&showMyProfs=true`
         : "/";
 
+    console.log("result rating " + resultRating);
     const linkStyle: CSSProperties = {
       pointerEvents: resultRating !== "Not Found" ? "auto" : "none",
       color: ratingColor(resultRating),
       fontSize: "15px",
     };
     instructorElements.push(
-      <a href={rmpLink}>
-        <div style={linkStyle}>
-          {" "}
+      <div>
+        <a href={rmpLink} style={linkStyle}>
           <strong> RMP: {resultRating} </strong>
-        </div>
-      </a>
+        </a>
+      </div>
     );
   }
 
@@ -187,7 +187,7 @@ const Section = ({ data }) => {
           <div style={{ fontWeight: "bold" }}>{type}</div>
         </div>
         <div className="col">
-          <div>Registration #</div>
+          <div>Reg #</div>
           <div style={{ fontWeight: "bold" }}>{registrationNumber}</div>
         </div>
 
