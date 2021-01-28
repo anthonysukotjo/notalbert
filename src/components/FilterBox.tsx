@@ -147,7 +147,9 @@ const FilterBox = ({
         }
         const subjectData = await subjectResponse.json();
         subjectData["noCode"] = [];
-
+        for (const key in subjectData) {
+          Object.keys(subjectData[key]).sort();
+        }
         setSubjectList(() => ({
           subjectLoading: false,
           data: subjectData,

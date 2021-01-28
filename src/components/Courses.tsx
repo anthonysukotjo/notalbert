@@ -24,9 +24,15 @@ const CourseComponentListBuilder = ({
   //   inPerson: false,
   //   blended: false,
   // };
+  console.log("course data");
 
-  for (let i = 0; i < data.length; i++) {
-    elements.push(<Course data={data[i]} />);
+  const sortedData = data.sort(
+    (a, b) => parseFloat(a.deptCourseId) - parseFloat(b.deptCourseId)
+  );
+  console.log(sortedData);
+
+  for (let i = 0; i < sortedData.length; i++) {
+    elements.push(<Course data={sortedData[i]} />);
   }
   if (!loading) {
     return <div>{elements}</div>;
