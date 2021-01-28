@@ -93,9 +93,8 @@ const Courses = ({
         if (query !== "" && subject !== "noCode" && school !== "noCode") {
           link = searchLinkAndSubject;
         } else if (
-          query !== "" &&
-          subject === "noCode" &&
-          school === "noCode"
+          (query !== "" && subject === "noCode" && school === "noCode") ||
+          (query !== "" && subject === "noCode" && school === "selectOption")
         ) {
           link = searchLinkOnly;
         } else if (subject !== "noCode" && school !== "noCode") {

@@ -34,7 +34,7 @@ const SearchBar = ({ bool, retrieveSearch }) => {
             style={searchBarStyle}
             value={searchQuery}
             autoComplete="off"
-            placeholder="🔍 Search names and descriptions"
+            placeholder="🔍 Search course names"
             onChange={(e) => {
               retrieveSearch(e.target.value);
               setSearchQuery(e.target.value);
