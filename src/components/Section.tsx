@@ -8,10 +8,10 @@ const style = {
   display: "block",
   fontSize: "15px",
   padding: "25px",
-  marginBottom: "20px",
+  marginTop: "20px",
 };
 
-const Section = ({ data }) => {
+const Section = ({ data, courseName, courseCode }) => {
   const [showRecitations, setShowRecitations] = useState(false);
 
   let instructorElements: JSX.Element[] = [];
@@ -21,7 +21,13 @@ const Section = ({ data }) => {
     console.log("has recitation");
     for (let i = 0; i < data.recitations.length; i++) {
       // console.log(data.recitations[i]);
-      recitations.push(<Recitations data={data.recitations[i]} />);
+      recitations.push(
+        <Recitations
+          data={data.recitations[i]}
+          courseName={courseName}
+          courseCode={courseCode}
+        />
+      );
     }
   } else {
     recitations.push(<div />);
@@ -108,6 +114,17 @@ const Section = ({ data }) => {
 
   const week = ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"];
 
+  const tempIntArray: number[] = [];
+  const tempStringArray: String[] = [];
+  const newTimeObject = {
+    daysWord: tempStringArray,
+    daysNum: tempIntArray,
+    minutes: Array.isArray(data.meetings)
+      ? data.meetings[0].minutesDuration
+      : 0,
+    startTime: "",
+  };
+
   const meetingTimings: String[] = [];
   if (Array.isArray(data.meetings)) {
     for (let i = 0; i < data.meetings.length; i++) {
@@ -126,9 +143,12 @@ const Section = ({ data }) => {
       );
       console.log(dateObject);
       console.log("weekday: " + dateObject.getDay());
+      newTimeObject.daysNum.push(dateObject.getDay());
+      newTimeObject.daysWord.push(week[dateObject.getUTCDay()]);
 
       let time = data.meetings[i].beginDate.split(" ")[1];
       time = time.slice(0, time.length - 3);
+      newTimeObject.startTime = time;
 
       const totalMinutesDuration = data.meetings[i].minutesDuration;
       const hours = Math.floor(totalMinutesDuration / 60);
@@ -233,7 +253,65 @@ const Section = ({ data }) => {
         }}
       >
         {notes}
+
         <div className="row justify-content-end">
+          <button
+            className={"btn"}
+            style={{
+              marginRight: "15px",
+              backgroundColor: "blue",
+              color: "white",
+              marginTop: "10px",
+              fontSize: "15px",
+              // marginBottom: "10px",
+            }}
+            onClick={() => {
+              const prev = localStorage.getItem("Cart");
+              const temp = {
+                courseCode: courseCode + "-" + sectionCode,
+                courseName: courseName,
+                sectionCode: data.code,
+                time: newTimeObject,
+                location: data.location,
+                instructors: data.instructors,
+                regNo: data.registrationNumber,
+                type: data.type,
+                status: data.status,
+                hasRecitation: Array.isArray(data.recitations),
+                isRecitation: false,
+              };
+              let tempArray;
+              if (prev !== null) {
+                //cart exists
+                tempArray = JSON.parse(prev);
+                console.log("local storage check");
+                console.log(tempArray);
+                const bool = tempArray.some(
+                  (e) =>
+                    e.courseCode === temp.courseCode &&
+                    e.sectionCode === temp.sectionCode
+                );
+
+                console.log(bool);
+
+                if (bool) {
+                  alert("item already in cart");
+                } else {
+                  tempArray.push(temp);
+                  localStorage.setItem("Cart", JSON.stringify(tempArray));
+                  alert("Save succesful");
+                }
+              } else {
+                //prev storage is empty
+                tempArray = [];
+                tempArray.push(temp);
+                localStorage.setItem("Cart", JSON.stringify(tempArray));
+                alert("Save succesful");
+              }
+            }}
+          >
+            <strong>Add to Cart</strong>
+          </button>
           {data.hasOwnProperty("recitations") ? (
             <button
               className={"btn"}
@@ -243,13 +321,13 @@ const Section = ({ data }) => {
                 color: "white",
                 fontSize: "15px",
                 marginTop: "10px",
-                marginBottom: "25px",
+                // marginBottom: "10px",
               }}
               onClick={() => {
                 setShowRecitations(!showRecitations);
               }}
             >
-              {showRecitations ? "Hide" : "Show"} Recitations
+              <strong>{showRecitations ? "Hide" : "Show"} Recitations</strong>
             </button>
           ) : (
             <div />

@@ -17,6 +17,13 @@ a:active  {color:#000;}  /* selected link   */
   /*border-bottom-width: 900px !important;*/
 }
 
+.day{
+  background-color: red;
+  height: 11.5px;
+  display: flex;
+  border: dotted 0px black;
+  margin-bottom: 1px;
+}
 .searchBarDiv{
 
   width: min(900px,87vw)
@@ -53,6 +60,20 @@ a:active  {color:#000;}  /* selected link   */
 /* On mouse-over */
 .btn:hover {background: #eee;}
 
+.ct{
+  margin-top: 0.5px;
+  font-size: 12px;
+  margin-bottom: -7px;
+
+}
+
+.calendar-course-text{
+  color:white;
+  gap: 0px;
+
+  display: block;
+  height: 80px;
+}
 .pageBody{
   padding:30px;
 }

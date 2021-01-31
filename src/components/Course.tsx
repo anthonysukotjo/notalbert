@@ -28,7 +28,13 @@ const Course = ({ data }) => {
   let elements: JSX.Element[] = [];
   for (let i = 0; i < noOfSections; i++) {
     const sectionData = data.sections[i];
-    elements.push(<Section data={sectionData} />);
+    elements.push(
+      <Section
+        data={sectionData}
+        courseCode={courseCode}
+        courseName={courseName}
+      />
+    );
   }
 
   const sectionText = noOfSections === 1 ? " Section" : " Sections";
@@ -69,7 +75,7 @@ const Course = ({ data }) => {
             setShowSections(!showSections);
           }}
           style={{
-            marginBottom: "20px",
+            // marginBottom: "10px",
             backgroundColor: "grey",
             color: "white",
             fontSize: "15px",

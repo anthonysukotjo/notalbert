@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const style = {
   height: "65px",
   backgroundColor: "#54008c",
+  marginBottom: "-10px",
 };
 
 const iconStyle = {
@@ -26,21 +27,20 @@ const HeaderBar = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto" style={{ backgroundColor: "#54008c" }}>
-            {/*<Link to='/search'  className="nav-link">*/}
-            {/*    <text style={iconStyle}>*/}
-
-            {/*        🔍 Search*/}
-            {/*    </text>*/}
-            {/*</Link>*/}
-            <Link to="/timetable" className="nav-link">
+            <Link to="/home" className="nav-link">
               <text style={iconStyle}>
-                🗓 <strong>Timetable</strong>
+                🔍 <strong>Search</strong>
               </text>
             </Link>
+            <Link to="/timetable" className="nav-link">
+              <div style={iconStyle}>
+                🗓 <strong>Timetable</strong>
+              </div>
+            </Link>
             <Link to="/aboutus" className="nav-link">
-              <text style={iconStyle}>
+              <div style={iconStyle}>
                 ✨ <strong>About</strong>
-              </text>
+              </div>
             </Link>
           </Nav>
         </Navbar.Collapse>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const searchBarStyle = {
   height: "50px",
   width: "95%",
-  marginTop: "25px",
+  // marginTop: "25px",
   padding: "15px",
   border: "hidden",
 };

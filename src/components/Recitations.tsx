@@ -7,10 +7,10 @@ const style = {
   display: "block",
   fontSize: "15px",
   padding: "15px",
-  marginBottom: "20px",
+  marginTop: "20px",
 };
 
-const Recitations = ({ data }) => {
+const Recitations = ({ data, courseCode, courseName }) => {
   let instructorElements: JSX.Element[] = [];
 
   for (let j = 0; j < data.instructors.length; j++) {
@@ -92,6 +92,17 @@ const Recitations = ({ data }) => {
 
   const week = ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"];
 
+  const tempIntArray: number[] = [];
+  const tempStringArray: String[] = [];
+  const newTimeObject = {
+    daysWord: tempStringArray,
+    daysNum: tempIntArray,
+    minutes: Array.isArray(data.meetings)
+      ? data.meetings[0].minutesDuration
+      : 0,
+    startTime: "",
+  };
+
   const meetingTimings: String[] = [];
   if (Array.isArray(data.meetings)) {
     for (let i = 0; i < data.meetings.length; i++) {
@@ -103,16 +114,20 @@ const Recitations = ({ data }) => {
       for (const index in dateArray) {
         console.log(dateArray[index]);
       }
+
       const dateObject = new Date(
         parseInt(dateArray[0]),
         parseInt(dateArray[1]) - 1,
         parseInt(dateArray[2])
       );
+      newTimeObject.daysNum.push(dateObject.getDay());
+      newTimeObject.daysWord.push(week[dateObject.getUTCDay()]);
       console.log(dateObject);
       console.log("weekday: " + dateObject.getDay());
 
       let time = data.meetings[i].beginDate.split(" ")[1];
       time = time.slice(0, time.length - 3);
+      newTimeObject.startTime = time;
 
       const totalMinutesDuration = data.meetings[i].minutesDuration;
       const hours = Math.floor(totalMinutesDuration / 60);
@@ -210,6 +225,65 @@ const Recitations = ({ data }) => {
         style={{ textAlign: "justify" }}
       >
         {notes}
+      </div>
+      <div className={"row justify-content-end"}>
+        <button
+          className={"btn"}
+          style={{
+            marginRight: "15px",
+            backgroundColor: "blue",
+            color: "white",
+            marginTop: "10px",
+            fontSize: "15px",
+            // marginBottom: "10px",
+          }}
+          onClick={() => {
+            const prev = localStorage.getItem("Cart");
+            const temp = {
+              courseCode: courseCode + "-" + sectionCode,
+              courseName: courseName,
+              sectionCode: data.code,
+              time: newTimeObject,
+              location: data.location,
+              instructors: data.instructors,
+              regNo: data.registrationNumber,
+              type: data.type,
+              status: data.status,
+              hasRecitation: Array.isArray(data.recitations),
+              isRecitation: true,
+            };
+            let tempArray;
+            if (prev !== null) {
+              //cart exists
+              tempArray = JSON.parse(prev);
+              console.log("local storage check");
+              console.log(tempArray);
+              const bool = tempArray.some(
+                (e) =>
+                  e.courseCode === temp.courseCode &&
+                  e.sectionCode === temp.sectionCode
+              );
+
+              console.log(bool);
+
+              if (bool) {
+                alert("item already in cart");
+              } else {
+                tempArray.push(temp);
+                localStorage.setItem("Cart", JSON.stringify(tempArray));
+                alert("Save succesful");
+              }
+            } else {
+              //prev storage is empty
+              tempArray = [];
+              tempArray.push(temp);
+              localStorage.setItem("Cart", JSON.stringify(tempArray));
+              alert("Save succesful");
+            }
+          }}
+        >
+          <strong>Add to Cart</strong>
+        </button>
       </div>
     </div>
   );

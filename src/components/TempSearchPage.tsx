@@ -112,7 +112,7 @@ const SearchPage = () => {
               <EmptySearchText />
             )}
           </div>
-          <div className={"align-content-start"}>
+          <div className={"col "}>
             <FilterBox
               retrieveSem={retrieveSem}
               retrieveInstructionMode={retrieveInstructionMode}
