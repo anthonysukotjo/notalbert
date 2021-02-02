@@ -1,10 +1,10 @@
 import React from "react";
-import Schools from "./Schools";
+import Schools from "../components/Schools";
 // import SearchBar from "./SearchBar";
 // import FilterBox from "./FilterBox";
 // import EmptySearchText from "./EmptySearchText";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <Schools />
 
@@ -21,4 +21,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
