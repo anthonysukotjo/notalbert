@@ -1,9 +1,9 @@
 //to be deleted and merged with home once searchbar and filter box is finished
 import React, { useState } from "react";
-import SearchBar from "./SearchBar";
-import EmptySearchText from "./EmptySearchText";
-import FilterBox from "./FilterBox";
-import Courses from "./Courses";
+import SearchBar from "../components/SearchBar";
+import EmptySearchText from "../components/EmptySearchText";
+import FilterBox from "../components/FilterBox";
+import Courses from "../components/Courses";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState("");

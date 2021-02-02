@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Time from "./TimeTable/Time";
-import ScheduleBlocks from "./TimeTable/ScheduleBlocks";
-import Cart from "./TimeTable/Cart";
-import TimeTableCourseBuilder from "./TimeTable/TimeTableCourseBuilder";
+import Time from "../components/TimeTable/Time";
+import ScheduleBlocks from "../components/TimeTable/ScheduleBlocks";
+import Cart from "../components/TimeTable/Cart/Cart";
+import TimeTableCourseBuilder from "../components/TimeTable/TimeTableCourseBuilder";
 
-const TimeTable = () => {
+const TimeTablePage = () => {
   const [indexOfCalElements, setIndexOfCalElements] = useState([]);
   const [howMany, setHowMany] = useState(0);
   console.log("timetable page, the calendar should show ");
@@ -36,4 +36,5 @@ const TimeTable = () => {
     </div>
   );
 };
-export default TimeTable;
+
+export default TimeTablePage;

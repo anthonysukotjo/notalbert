@@ -6,8 +6,8 @@ import HeaderBar from "./components/AppBar";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 // import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
-import TimeTable from "./components/TimeTable";
-import SearchPage from "./components/TempSearchPage";
+import TimeTablePage from "./pages/TimeTablePage";
+import SearchPage from "./pages/TempSearchPage";
 
 function App() {
   console.log();
@@ -44,7 +44,7 @@ function App() {
             {/*           <Courses {...props}  term={'sp'} year={'2021'}/>*/}
             {/*       )}*/}
             {/*/>*/}
-            <Route exact path="/timetable" component={TimeTable} />
+            <Route exact path="/timetable" component={TimeTablePage} />
             <Route exact path="/aboutus" component={AboutUs} />
             {/*<Route exact path="/search" component={SearchPage} />*/}
           </Switch>
