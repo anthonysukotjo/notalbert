@@ -23,6 +23,7 @@ const FilterBox = ({
   retrieveSelectedSubjects,
 }) => {
   const semOptions = [
+    { semCode: "2021:su", label: "Summer 2021" },
     { semCode: "2021:sp", label: "Spring 2021" },
     { semCode: "2020:fa", label: "Fall 2020" },
   ];
