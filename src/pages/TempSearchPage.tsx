@@ -15,7 +15,7 @@ const SearchPage = () => {
 
   const [sem, setSem] = useState({
     year: "2021",
-    term: "sp",
+    term: "su",
   });
 
   const retrieveSem = (year, term) => {
