@@ -142,9 +142,10 @@ const Section = ({ data, courseName, courseCode }) => {
         parseInt(dateArray[2])
       );
       console.log(dateObject);
+      //BUG HERE
       console.log("weekday: " + dateObject.getDay());
       newTimeObject.daysNum.push(dateObject.getDay());
-      newTimeObject.daysWord.push(week[dateObject.getUTCDay()]);
+      newTimeObject.daysWord.push(week[dateObject.getUTCDay() - 1]);
 
       let time = data.meetings[i].beginDate.split(" ")[1];
       time = time.slice(0, time.length - 3);
@@ -156,7 +157,7 @@ const Section = ({ data, courseName, courseCode }) => {
 
       result =
         result +
-        week[dateObject.getUTCDay()] +
+        week[dateObject.getUTCDay() - 1] +
         " " +
         time +
         "\n" +
