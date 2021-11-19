@@ -16,6 +16,8 @@ const ScheduleBlocks = () => {
         <Weekday day={2} />
         <Weekday day={3} />
         <Weekday day={4} />
+        <Weekday day={5} />
+        <Weekday day={6} />
       </div>
     </div>
   );

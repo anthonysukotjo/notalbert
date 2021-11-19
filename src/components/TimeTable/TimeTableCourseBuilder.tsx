@@ -24,7 +24,7 @@ const TimeTableCourseBuilder = ({ indices, howMany }) => {
       type: "no",
     },
   ]);
-  const week = [142, 282, 422, 562, 702];
+  const week = [142, 242, 342, 442, 542, 642, 742];
 
   useEffect(() => {
     // const elementsUpdated = elements;
