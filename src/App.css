@@ -62,8 +62,9 @@ a:active  {color:#000;}  /* selected link   */
 
 .ct{
   margin-top: 0.5px;
-  font-size: 12px;
-  margin-bottom: -7px;
+  font-size: 8px;
+  /*margin-bottom: -5px;*/
+  line-height: 8px;
 
 }
 
