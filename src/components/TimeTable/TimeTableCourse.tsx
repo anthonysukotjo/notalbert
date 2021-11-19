@@ -44,11 +44,11 @@ const TimeTableCourse = ({
     >
       <div className={"col calendar-course-text"}>
         <div className={" ct"}>
-          <strong> {courseCode.split(" ")[0]}</strong>{" "}
+          <strong> {courseCode}</strong>{" "}
         </div>
-        <div className={" ct"}>
-          <strong> {courseCode.split(" ")[1]}</strong>{" "}
-        </div>
+        {/*<div className={" ct"}>*/}
+        {/*  <strong> {courseCode.split(" ")[1]}</strong>{" "}*/}
+        {/*</div>*/}
         <div className={" ct"}>
           <strong>
             {" "}
