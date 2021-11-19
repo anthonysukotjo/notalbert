@@ -1,6 +1,6 @@
 import React from "react";
 
-const weekdays = ["Mon", "Tue", "Wed", "Thurs", "Fri"];
+const weekdays = ["Mon", "Tue", "Wed", "Thurs", "Fri", "Sat", "Sun"];
 
 const Weekday = ({ day }) => {
   let elements: JSX.Element[] = [];

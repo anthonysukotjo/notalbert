@@ -32,7 +32,7 @@ const TimeTableCourse = ({
   return (
     <div
       style={{
-        width: "135px",
+        width: "95px",
         height: (12.5 * timeIn15MinBlocks).toString() + "px",
         backgroundColor: "#54008c",
         textAlign: "center",
