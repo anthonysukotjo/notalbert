@@ -10072,10 +10072,10 @@ react-scripts@4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
-react-social-icons@^5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-5.5.1.tgz#dcac503c91f25737e2dcd90f69489401c972e417"
-  integrity sha512-JBq4dbtthfN+PSUOw4mCu8VDvx+tCce3GcGlAb0xipfd4xmwwVBTLLYpNhkYcMFfCyK6E75XHeY/EwvIRdYJiA==
+react-social-icons@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/react-social-icons/-/react-social-icons-5.7.0.tgz#25d763152f7ea098d6cf7ed2a7d9013c7fc07e06"
+  integrity sha512-oQTK1jRtXhc3VOdhGzHJwTGQ/yRANXBqY62LrHNkdGl4EDINC/UdEa35OmxdZZAtsdwOj7mJSU2Cx1wmaGD5gw==
   dependencies:
     prop-types "^15.7.2"
 
