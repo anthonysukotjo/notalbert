@@ -1,5 +1,4 @@
 import React, { CSSProperties, useState } from "react";
-// import rmpData from "./newrmpdata.json";
 import rmpData from "./updatedrmp.json";
 import Recitations from "./Recitations";
 
