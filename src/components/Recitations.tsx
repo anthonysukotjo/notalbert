@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
-import rmpData from "./newrmpdata.json";
+// import rmpData from "./newrmpdata.json";
+import rmpData from "./updatedrmp.json";
 
 const style = {
   backgroundColor: "#D9CAE5",
