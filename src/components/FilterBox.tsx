@@ -23,14 +23,14 @@ const FilterBox = ({
   retrieveSelectedSubjects,
 }) => {
   const semOptions = [
+    { semCode: "2022:fa", label: "Fall 2022" },
     { semCode: "2022:sp", label: "Spring 2022" },
     { semCode: "2021:fa", label: "Fall 2021" },
     { semCode: "2021:su", label: "Summer 2021" },
     { semCode: "2021:sp", label: "Spring 2021" },
     { semCode: "2020:fa", label: "Fall 2020" },
-    { semCode: "2022:sp", label: "Spring 2022" },
   ];
-  const [sem, setSem] = useState("2022:sp");
+  const [sem, setSem] = useState("2022:fa");
 
   const [instructionMode, setInstructionMode] = useState({
     online: false,
